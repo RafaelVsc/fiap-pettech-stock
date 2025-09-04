@@ -8,6 +8,9 @@ services:
     depends_on:
       - mongodb
     restart: unless-stopped
+    networks:
+      - mynetwork
+
   mongodb:
     image: mongo:6
     container_name: mongodb_dev
@@ -20,6 +23,33 @@ services:
     volumes:
       - mongo_data:/data/db
     restart: unless-stopped
+    networks:
+      - mynetwork
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    networks:
+      - mynetwork
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+    networks:
+      - mynetwork
+    depends_on:
+      - prometheus
 
   # opcional: interface web para visualizar e testar o Mongo
   mongo-express:
@@ -36,7 +66,14 @@ services:
       ME_CONFIG_MONGODB_AUTH_DATABASE: admin
       ME_CONFIG_BASICAUTH: "false"
     restart: unless-stopped
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
 
 volumes:
   mongo_data:
-
+  prometheus_data:
+  grafana_data:

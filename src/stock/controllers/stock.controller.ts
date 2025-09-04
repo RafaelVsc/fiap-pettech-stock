@@ -49,7 +49,7 @@ export class StockController {
     return this.stockService.getStock(productId);
   }
   @Post()
-  @UseGuards(AuthGuard)
+  // @UseGuards(AuthGuard)
   @UsePipes(new ZodValidatioPipe(createStockSchema))
   async createStock(@Body() { name, quantity, relationId }: CreateStock) {
     return this.stockService.createStock({ name, quantity, relationId });

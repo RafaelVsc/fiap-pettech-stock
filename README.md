@@ -1,98 +1,231 @@
+# FIAP PetTech Stock - Sistema de Gerenciamento de Estoque
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Descrição
 
-  <p align="center">A progressive! <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Sistema de gerenciamento de estoque desenvolvido em NestJS para uma empresa de produtos para pets (PetTech). Este projeto acadêmico da FIAP implementa uma API REST completa com autenticação JWT, monitoramento e documentação automática.
 
-## Description
+## 📋 Funcionalidades
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- ✅ **CRUD completo de produtos**: Criar, listar, atualizar e deletar produtos do estoque
+- ✅ **Autenticação JWT**: Sistema de autenticação baseado em tokens
+- ✅ **Validação de dados**: Validação robusta usando Zod schemas
+- ✅ **Documentação automática**: Swagger/OpenAPI e ReDoc
+- ✅ **Monitoramento**: Integração com Prometheus e Grafana
+- ✅ **Containerização**: Docker e Docker Compose
+- ✅ **CI/CD**: Pipeline automatizado com GitHub Actions
 
-## Project setup
+## 📖 Documentação
 
+### Arquitetura do Sistema
+Para uma explicação detalhada da arquitetura, tecnologias utilizadas e padrões implementados, consulte:
+
+📄 **[ARQUITETURA.md](./ARQUITETURA.md)** - Documentação completa da arquitetura do projeto
+
+📊 **[DIAGRAMAS.md](./DIAGRAMAS.md)** - Diagramas visuais da arquitetura do sistema
+
+### API Documentation
+Quando a aplicação estiver rodando, acesse:
+- **Swagger UI**: http://localhost:3010/api
+- **ReDoc**: http://localhost:3010/docs
+
+## 🚀 Setup do Projeto
+
+### Pré-requisitos
+
+- Node.js 18+ 
+- Docker e Docker Compose
+- npm (ou pnpm conforme instruções do professor)
+
+### Instalação
+
+1. **Clone o repositório**
 ```bash
-$ npm install
+git clone <repository-url>
+cd fiap-pettech-stock
 ```
 
-## Compile and run the project
-
+2. **Instale as dependências**
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm install
 ```
 
-## Run tests
-
+3. **Configure as variáveis de ambiente**
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+cp .env.example .env
+# Edite o arquivo .env com suas configurações
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+### Exemplo de .env:
+```env
+MONGO_USER=devuser
+MONGO_PASSWORD=devpass
+MONGO_DB=pettech_stock
+PORT=3010
+MONGO_URI=mongodb://devuser:devpass@mongodb:27017/pettech_stock?authSource=admin
+JWT_SECRET=seu_jwt_secret_muito_seguro_aqui
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+## 📦 Executando com Docker Compose
 
-## Resources
+O projeto inclui um setup completo com Docker Compose que inclui:
+- API da aplicação
+- MongoDB
+- Mongo Express (interface web)
+- Prometheus (métricas)
+- Grafana (dashboards)
 
-Check out a few resources that may come in handy when working with NestJS:
+```bash
+# Subir todos os serviços
+docker-compose up -d
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+# Verificar logs
+docker-compose logs -f api
 
-## Support
+# Parar todos os serviços
+docker-compose down
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### Portas dos serviços:
+- **API**: http://localhost:3010
+- **Mongo Express**: http://localhost:8081
+- **Prometheus**: http://localhost:9090
+- **Grafana**: http://localhost:3000
 
-## Stay in touch
+## 🛠️ Desenvolvimento Local
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### Scripts Disponíveis
 
-## License
+```bash
+# Desenvolvimento
+npm run start:dev          # Execução em modo watch (recomendado para dev)
+npm run start:debug        # Execução em modo debug
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+# Produção
+npm run build              # Build da aplicação
+npm run start:prod         # Execução em modo produção
+
+# Qualidade de código
+npm run lint               # Verificação de código com ESLint
+npm run format             # Formatação de código com Prettier
+
+# Testes
+npm run test               # Testes unitários
+npm run test:watch         # Testes em modo watch
+npm run test:cov           # Cobertura de testes
+npm run test:debug         # Testes em modo debug
+npm run test:e2e           # Testes end-to-end
+```
+
+## 🧪 Testes
+
+```bash
+# Executar todos os testes unitários
+npm run test
+
+# Testes com cobertura
+npm run test:cov
+
+# Testes end-to-end
+npm run test:e2e
+```
+
+## 🐳 Docker
+
+### Build da imagem
+```bash
+docker build -t pettech-stock:latest .
+```
+
+### Executar apenas a aplicação (requer MongoDB externo)
+```bash
+docker run -p 3010:3010 --env-file .env pettech-stock:latest
+```
+
+## 📊 Monitoramento
+
+### Prometheus Metrics
+Acesse http://localhost:9090 para ver as métricas coletadas.
+
+### Grafana Dashboards  
+Acesse http://localhost:3000 para visualizar os dashboards.
+- Usuário padrão: `admin`
+- Senha padrão: `admin`
+
+## 🔧 Configuração para Produção
+
+### Variáveis de Ambiente Importantes
+
+```env
+# Banco de dados (NÃO usar MongoDB Atlas conforme orientação)
+MONGO_URI=mongodb://usuario:senha@host:porta/database
+
+# Segurança
+JWT_SECRET=chave_super_secreta_para_jwt
+
+# Aplicação
+PORT=3010
+NODE_ENV=production
+```
+
+### GitHub Actions
+
+O projeto inclui CI/CD com GitHub Actions. Para configurar:
+
+1. **Adicione os secrets no GitHub:**
+   - `DOCKER_USERNAME`: Usuário do Docker Hub
+   - `DOCKER_PASSWORD`: Senha/Token do Docker Hub  
+   - `RENDER_SERVICE_ID`: ID do serviço no Render
+   - `RENDER_API_KEY`: API Key do Render
+   - `JWT_SECRET`: Secret para JWT
+
+2. **O pipeline irá:**
+   - Fazer build da aplicação
+   - Criar imagem Docker
+   - Enviar para Docker Hub
+   - Fazer deploy no Render
+
+## 📋 API Endpoints
+
+### Produtos/Estoque
+
+| Método | Endpoint | Descrição | Autenticação |
+|--------|----------|-----------|--------------|
+| `GET` | `/stock` | Lista todos os produtos | ❌ |
+| `GET` | `/stock/:id` | Busca produto específico | ❌ |
+| `POST` | `/stock` | Cria novo produto | ✅ JWT |
+| `PUT` | `/stock/:id` | Atualiza estoque | ❌ |
+| `DELETE` | `/stock/:id` | Remove produto | ❌ |
+
+### Exemplo de payload para criação:
+```json
+{
+  "name": "Ração Premium para Cães",
+  "quantity": 100,
+  "relationId": "produto-123"
+}
+```
+
+## 🤝 Contribuição
+
+1. Faça um fork do projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)  
+5. Abra um Pull Request
+
+## 📝 Notas do Projeto Acadêmico
+
+- ✅ Projeto desenvolvido seguindo as aulas da FIAP
+- ✅ Adaptações feitas para funcionar com versões atuais
+- ✅ MongoDB local em vez de Atlas conforme orientação  
+- ✅ Uso do pnpm conforme exemplo do professor
+- ✅ GitHub Actions configurado para CI/CD
+- ✅ Docker e Docker Compose para ambiente local
+
+## 📄 Licença
+
+Este projeto é licenciado sob a licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
